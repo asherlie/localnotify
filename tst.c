@@ -1,16 +1,23 @@
 #include "localnotify.h"
 
-register_ln_payload(tst, "wlp3s0", int, 0)
+struct struct_ex{
+    int i;
+    char str[6];
+    float f;
+};
+
+register_ln_payload(tst, "wlp3s0", struct struct_ex, 0)
 
 int main() {
     _Bool success; 
     struct in_addr addr;
-    int r;
+    struct struct_ex r = {0};
 
-    broadcast_tst(3);
+    memcpy(r.str, "asher", 5);
+    broadcast_tst(r);
     r = recv_tst(&success, &addr);
 
     if (success) {
-        printf("succesfully received: %i\n", r);
+        printf("succesfully received: {%i, %s, %f}\n", r.i, r.str, r.f);
     }
 }
