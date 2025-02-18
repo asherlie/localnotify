@@ -14,6 +14,8 @@ int main() {
     struct struct_ex r = {0};
 
     memcpy(r.str, "asher", 5);
+    r.i = 4902;
+    r.f = 113.999;
     broadcast_tst(r);
     r = recv_tst(&success, &addr);
 
